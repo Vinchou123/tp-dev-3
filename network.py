@@ -49,7 +49,7 @@ def ping(ip_adress):
    
     try: 
         ipaddress.ip_address(ip_adress)
-        response = system(f'ping -n 4 {ip_adress} > NUL 2>&1')
+        response = system(f'ping -n 2 {ip_adress} > NUL 2>&1')
 
         if response == 0 :
             return True
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 print('UP !')
             else:
                 print('DOWN !')
-            log_command("ping", argument, res)
+            log_command("ping", argument, res == "Adresse IP invalide")
     elif command == "ip":
             result = ip()
             log_command("ip")
