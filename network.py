@@ -78,9 +78,7 @@ def ip():
     return 'Adresse IP inconnue'
 
 def read_log():
-    log_file_path = r'%appdata%\Local\Temp\network_tp3\network.log'  
-    log_file_path = os.path.expandvars(log_file_path) 
-
+    log_file_path = LOG_FILE  
     try:
         with open(log_file_path, 'r') as log_file:
             content = log_file.read()
