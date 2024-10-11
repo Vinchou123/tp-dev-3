@@ -10,16 +10,10 @@ import logging
 import psutil
 import platform
 
-if platform.system() == 'Windows':
-    TEMP_DIR = os.path.join('/tmp', 'network_tp3')
-
-else:
-    TEMP_DIR = '/tmp'
 
 
-NETWORK_DIR = os.path.join(TEMP_DIR, "network_tp3")
-LOG_FILE = os.path.join(NETWORK_DIR, "network.log")
-
+TEMP_DIR = os.path.join(tempfile.gettempdir(), "network_tp3")
+LOG_FILE = os.path.join(TEMP_DIR, "network.log")
 
 os.makedirs(NETWORK_DIR, exist_ok=True)
 log_entries = []
