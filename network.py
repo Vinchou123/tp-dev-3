@@ -11,7 +11,8 @@ import psutil
 import platform
 
 if platform.system() == 'Windows':
-    TEMP_DIR = os.path.join(os.getenv('APPDATA'), 'Local', 'Temp')
+    TEMP_DIR = os.path.join('/tmp', 'network_tp3')
+
 else:
     TEMP_DIR = '/tmp'
 
