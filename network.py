@@ -81,7 +81,7 @@ def ip():
                 netmask_bits = network.prefixlen               
                 return f'{ip_address}/{netmask_bits}'
 
-    return 'Adresse IP intconnue'
+    return 'Adresse IP inconnue'
 
 def read_log():
     log_file_path = r'%appdata%\Local\Temp\network_tp3\network.log'  
