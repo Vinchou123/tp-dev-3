@@ -15,7 +15,7 @@ import platform
 TEMP_DIR = os.path.join(tempfile.gettempdir(), "network_tp3")
 LOG_FILE = os.path.join(TEMP_DIR, "network.log")
 
-os.makedirs(NETWORK_DIR, exist_ok=True)
+os.makedirs(TEMP_DIR, exist_ok=True)
 log_entries = []
 
 
