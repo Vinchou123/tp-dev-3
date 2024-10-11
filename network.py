@@ -70,7 +70,7 @@ def ping(ip_adress):
         
 def ip():
     interfaces = psutil.net_if_addrs()
-    ip_wifi= 'Wi-Fi'
+    ip_wifi= 'enp0s3'
 
     if ip_wifi in interfaces:
         for interface in interfaces[ip_wifi]:
