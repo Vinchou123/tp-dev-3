@@ -3,14 +3,19 @@ import re
 from sys import argv
 from os import system
 import ipaddress
-import psutil
 import tempfile
 from datetime import datetime
 import os
 import logging
+import psutil
+import platform
+
+if platform.system() == 'Windows':
+    TEMP_DIR = os.path.join(os.getenv('APPDATA'), 'Local', 'Temp')
+else:
+    TEMP_DIR = '/tmp'
 
 
-TEMP_DIR = os.path.join(os.getenv('APPDATA'), 'Local', 'Temp')
 NETWORK_DIR = os.path.join(TEMP_DIR, "network_tp3")
 LOG_FILE = os.path.join(NETWORK_DIR, "network.log")
 
