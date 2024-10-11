@@ -1,6 +1,6 @@
 import socket
 import re
-from sys import argv
+from sys import argv, exit
 from os import system
 import ipaddress
 import tempfile
@@ -49,17 +49,17 @@ def ping(ip_adress):
    
     try: 
         ipaddress.ip_address(ip_adress)
-        response = system(f'ping -n 1 {ip_adress} > NUL 2>&1')
+        response = system(f'ping -n 4 {ip_adress} > NUL 2>&1')
 
         if response == 0 :
-           return 'UP !'
+            return True
 
         else:
-            return 'DOWN !'
+            return False
 
     except ValueError:
-        return "Adresse IP invalide"
-    
+        print("Adresse IP invalide")
+        exit(1)
     
         
 def ip():
@@ -104,8 +104,12 @@ if __name__ == '__main__':
             result = lookup(argument)
             log_command("lookup", argument, result != "Nom de domaine invalide")
     elif command == "ping" and argument:
-            result = ping(argument)
-            log_command("ping", argument, result != "Adresse IP invalide")
+            res = ping(argument)
+            if res:
+                print('UP !')
+            else:
+                print('DOWN !')
+            log_command("ping", argument, res)
     elif command == "ip":
             result = ip()
             log_command("ip")
