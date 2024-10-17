@@ -13,7 +13,7 @@ s.sendall(b"Meooooo !")
 
 data=s.recv(1024)
 
-s.close
+s.close()
 print(f"Le serveru à répondu  {repr(data)}")
 
 exit(0)
