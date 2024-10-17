@@ -37,10 +37,12 @@ def lookup(nom_de_domaine):
    
         pattern = r'^[a-zA-Z0-9]+(\.[a-z0-9]+)+$'
         if not re.match(pattern, nom_de_domaine):
+            log_command ("lookup", argument= nom_de_domaine, error=True)
             return "Nom de domaine invalide"
         
         try: 
             ip_adress = socket.gethostbyname(nom_de_domaine)
+            log_command("lookup", argument= nom_de_domaine, error=False)
             return ip_adress
         except socket.gaierror:
             return "Nom de domaine inconnu"
@@ -91,7 +93,6 @@ def read_log():
         
 if __name__ == '__main__':
     
-    
 
     if len(argv) < 3 and argv[1] != "ip": 
         print("Usage: python network.py <lookup|ping|ip> <argument>")
@@ -102,7 +103,6 @@ if __name__ == '__main__':
 
     if command == "lookup" and argument:
             result = lookup(argument)
-            log_command("lookup", argument, result != "Nom de domaine invalide")
     elif command == "ping" and argument:
             res = ping(argument)
             if res:
@@ -122,7 +122,7 @@ if __name__ == '__main__':
         
     print(result)
     
-    read_log()
+  
     
     
         
