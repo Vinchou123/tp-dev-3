@@ -149,5 +149,44 @@ total 0
 -rw-rw-rw- 1 root root 0 Oct 23 20:42 bs_server.log
 ```
 
+```
+[vince@ServeurTP4 tp-dev-3]$ python bs_server_II2A.py
+2024-10-23 21:56:38 INFO Le serveur tourne sur 10.2.2.2:13337
+Le serveur tourne sur 10.2.2.2:13337
+2024-10-23 21:57:40 WARNING Aucun client depuis plus de une minute.
+Aucun client depuis plus de une minute.
+2024-10-23 21:58:27 INFO Un client (10.2.2.222) s'est connecté.
+Un client (10.2.2.222) s'est connecté.
+2024-10-23 21:58:34 INFO Le client 10.2.2.222 a envoyé "coucou".
+Le client 10.2.2.222 a envoyé "coucou".
+2024-10-23 21:58:34 INFO Réponse envoyée au client 10.2.2.222 : "Mes respects humble humain."
+Réponse envoyée au client 10.2.2.222 : "Mes respects humble humain."
+2024-10-23 21:59:27 WARNING Aucun client depuis plus de une minute.
+Aucun client depuis plus de une minute.
+```
+Dans le fichier des logs :
+```
+[vince@ServeurTP4 /]$ cd /var/log/bs_server/
+[vince@ServeurTP4 bs_server]$ cat bs_server.log
+
+2024-10-23 21:45:34 INFO Le serveur tourne sur 10.2.2.2:13337
+2024-10-23 21:51:02 INFO Un client (10.2.2.222) s'est connecté.
+2024-10-23 21:51:18 INFO Le client 10.2.2.222 a envoyé "Salut !".
+2024-10-23 21:51:18 INFO Réponse envoyée au client 10.2.2.222 : "Mes respects humble humain."
+2024-10-23 21:56:38 INFO Le serveur tourne sur 10.2.2.2:13337
+2024-10-23 21:57:40 WARNING Aucun client depuis plus de une minute.
+2024-10-23 21:58:27 INFO Un client (10.2.2.222) s'est connecté.
+2024-10-23 21:58:34 INFO Le client 10.2.2.222 a envoyé "coucou".
+2024-10-23 21:58:34 INFO Réponse envoyée au client 10.2.2.222 : "Mes respects humble humain."
+2024-10-23 21:59:27 WARNING Aucun client depuis plus de une minute.
+2024-10-23 22:00:27 WARNING Aucun client depuis plus de une minute.
+2024-10-23 22:01:28 WARNING Aucun client depuis plus de une minute.
+2024-10-23 22:02:28 WARNING Aucun client depuis plus de une minute.
+2024-10-23 22:03:28 WARNING Aucun client depuis plus de une minute.
+```
+🌞 bs_client_II2B.py
+
+
+
 
 
