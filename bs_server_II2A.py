@@ -90,7 +90,7 @@ def main():
                         response = "Mes respects humble humain."
                         
                     conn.sendall(response.encode('utf-8'))
-                    log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
+                    log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\"")
 
                 except socket.error as e:
                     log_warn(f"Une erreur est survenue : {e}")
@@ -112,7 +112,8 @@ def main():
         if time.time() - last_client_time > 60:
             log_warn("Aucun client depuis plus de une minute.")
             last_client_time = time.time()
-            time.sleep(60)
+            
+            time.sleep(1)
 
     s.close()
     sys.exit(0)
