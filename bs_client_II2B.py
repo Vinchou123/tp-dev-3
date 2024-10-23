@@ -43,14 +43,14 @@ try:
         print(f"Le serveur a répondu : '{data.decode('utf-8')}'")
         break
 
-except TypeError as te:
-    print(f"\033[31mErreur : {te}\033[0m")
 except socket.error as e:
     error_message = f"Impossible de se connecter au serveur {host} sur le port {port}."
     print(f"\033[31mERROR {error_message}\033[0m")
     logging.error(error_message)
+except TypeError as te:
+    print(f"Erreur : {te}")
 except Exception as e:
-    print(f"\033[31mErreur : {e}\033[0m")
+    print(f"Erreur : {e}")
 
 finally:
     s.close()
