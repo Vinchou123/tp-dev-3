@@ -33,7 +33,7 @@ try:
     log_info(f"Connexion réussie à {host} sur le port {port}")
     
     while True:
-        expression = input("Entrez une opération arithmétique (ex: 5 + 3) : ")
+        expression = input("Entrez une opération arithmétique : ")
         
         if not re.match(r'^-?\d+\s*[\+\-\*]\s*-?\d+$', expression):
             log_error("Erreur : L'entrée doit être une opération arithmétique valide avec des entiers.")
