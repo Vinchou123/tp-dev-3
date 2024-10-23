@@ -10,9 +10,11 @@ try:
     s.connect((host, port))
     print(f"Connecté avec succès au serveur {host} sur le port {port}")
     
-    message = input("Que souhaites-tu écrire au serveur ?")
+    message = input("Que souhaites-tu écrire au serveur ? ")
     s.sendall(message.encode('utf-8'))  
     data = s.recv(1024)
+    
+    print(f"Le serveur a répondu : '{data.decode('utf-8')}'")  
     
 except Exception as e:
     print(f"Erreur lors de la connexion au serveur : {e}")
@@ -20,5 +22,4 @@ except Exception as e:
 finally:
     s.close()
 
-print(f"Le serveur a répondu : {repr(data)}")
 sys.exit(0)

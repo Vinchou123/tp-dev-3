@@ -12,7 +12,7 @@ s.listen(1)
 print(f"Serveur en attente de connexions sur le port {port}...")
 
 conn, addr = s.accept()
-print(f"Un client vient de se co et son IP c'est {addr[0]}.")
+print(f"Un client vient de se connecter, son IP c'est {addr[0]}.")
 
 while True:
     try:
@@ -21,11 +21,11 @@ while True:
             break
         
         decoded_data = data.decode('utf-8')
-        print(f"Données reçues du client : {decoded_data()}")
+        print(f"Données reçues du client : {decoded_data}")
         
-        if "meo" in decoded_data().lower():
+        if "meo" in decoded_data.lower():
             response = "Meo à toi confrère."
-        elif "waf" in decoded_data().lower():
+        elif "waf" in decoded_data.lower():
             response = "ptdr t ki"
         else:
             response = "Mes respects humble humain."
@@ -33,12 +33,11 @@ while True:
         conn.sendall(response.encode('utf-8'))
     
     except socket.error as e:
-        print("Une erreur est survenue : {e}")
+        print(f"Une erreur est survenue : {e}")
         break
     except Exception as e:
-        print(f"Erreur : {e}")
+        print(f"Erreur inattendue : {e}")
         break
     
 conn.close()
-
 sys.exit(0)
