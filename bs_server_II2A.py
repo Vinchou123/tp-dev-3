@@ -55,7 +55,7 @@ def main():
 
     args = parser.parse_args()
 
-    host = args.listen if args.listen else ''
+    host = args.listen if args.listen else socket.gethostbyname(socket.gethostname())
     port = args.port
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -89,8 +89,6 @@ def main():
                     else:
                         response = "Mes respects humble humain."
                         
-                    log_info(f"Le client a envoyé {addr[0]} : \"{decoded_data}\".")
-
                     conn.sendall(response.encode('utf-8'))
                     log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
 
@@ -110,9 +108,10 @@ def main():
         finally:
             if conn:
                 conn.close()
-
+                
         if time.time() - last_client_time > 60:
             log_warn("Aucun client depuis plus de une minute.")
+            last_client_time = time.time()
             time.sleep(60)
 
     s.close()
