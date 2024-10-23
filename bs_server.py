@@ -19,7 +19,7 @@ while True:
         if not data:
          break
         print(f"Données reçu du client: {data}")
-        conn.sendall("Hi mate ! ")
+        conn.sendall("Hi mate ! ".encode())
     
     except socket.error : 
         print("Error Occured.")
