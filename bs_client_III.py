@@ -16,7 +16,6 @@ logging.basicConfig(
     handlers=[logging.FileHandler(log_file_path)]
 )
 
-
 def log_error(message):
     print(f"\033[31m{message}\033[0m")
     logging.error(message)
@@ -50,15 +49,15 @@ try:
         s.sendall(expression.encode('utf-8'))
        
         data = s.recv(1024)
-        print(f"Le serveur a répondu : {data.decode('utf-8')}")
+        response = data.decode('utf-8')
+        print(f"Le serveur a répondu : {response}")
+
+        logging.info(f"Réponse reçue du serveur {host}: '{response}'")
         logging.info(f"Message envoyé au serveur {host}: '{expression}'")
 
 except Exception as e:
     log_error(f"Erreur lors de la connexion au serveur : {e}")
-    
-    conn.sendall('response'.encode('utf-8'))
-    logging.info(f"Réponse reçu du serveur {host}: 'response'")
-    
+
 finally:
     s.close()
     sys.exit(0)
