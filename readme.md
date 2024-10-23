@@ -25,3 +25,50 @@ LISTEN 0      1            0.0.0.0:13337      0.0.0.0:*    users:(("python",pid=
 ```
 
 ## 2. User friendly
+
+🌞 bs_client_I2.py
+
+
+```
+[vince@ClientTP4 tp-dev-3]$ python bs_client.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? meo
+Le serveur a répondu : 'Meo à toi confrère.'
+[vince@ClientTP4 tp-dev-3]$ python bs_client.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? waf
+Le serveur a répondu : 'ptdr t ki'
+[vince@ClientTP4 tp-dev-3]$ python bs_client.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? salut daz waf
+Le serveur a répondu : 'ptdr t ki'
+[vince@ClientTP4 tp-dev-3]$ python bs_client.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? salut !
+Le serveur a répondu : 'Mes respects humble humain.'
+```
+
+
+🌞 bs_server_I2.py
+
+```
+[vince@ServeurTP4 tp-dev-3]$ python bs_server.py
+Serveur en attente de connexions sur le port 13337...
+Un client vient de se connecter, son IP c'est 10.2.2.222.
+Données reçues du client : meo
+[vince@ServeurTP4 tp-dev-3]$ python bs_server.py
+Serveur en attente de connexions sur le port 13337...
+Un client vient de se connecter, son IP c'est 10.2.2.222.
+Données reçues du client : waf
+[vince@ServeurTP4 tp-dev-3]$ python bs_server.py
+Serveur en attente de connexions sur le port 13337...
+Un client vient de se connecter, son IP c'est 10.2.2.222.
+Données reçues du client : salut daz waf
+[vince@ServeurTP4 tp-dev-3]$ python bs_server.py
+Serveur en attente de connexions sur le port 13337...
+Un client vient de se connecter, son IP c'est 10.2.2.222.
+Données reçues du client : salut !
+```
+
+## 3. You say client I hear control
+
