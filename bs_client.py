@@ -14,8 +14,6 @@ try:
     s.sendall(message.encode('utf-8'))  
     data = s.recv(1024)
     
-    print(f"le serveur a répondu :'{data.decode('utf-8')}")
-    
 except Exception as e:
     print(f"Erreur lors de la connexion au serveur : {e}")
 

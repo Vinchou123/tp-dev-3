@@ -20,19 +20,23 @@ while True:
         if not data:
             break
         
-        print(f"Données reçues du client : {data.decode()}")
+        decoded_data = data.decode('utf-8')
+        print(f"Données reçues du client : {decoded_data()}")
         
-        if "meo" in data.decode().lower():
+        if "meo" in decoded_data().lower():
             response = "Meo à toi confrère."
-        elif "waf" in data.decode().lower():
+        elif "waf" in decoded_data().lower():
             response = "ptdr t ki"
         else:
             response = "Mes respects humble humain."
         
-        conn.sendall(response.encode())
+        conn.sendall(response.encode('utf-8'))
     
-    except socket.error:
-        print("Une erreur est survenue.")
+    except socket.error as e:
+        print("Une erreur est survenue : {e}")
+        break
+    except Exception as e:
+        print(f"Erreur : {e}")
         break
     
 conn.close()
