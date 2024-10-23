@@ -100,3 +100,54 @@ Données reçues du client : salut meo
 
 ## 1. Args
 
+🌞 bs_server_II1.py
+
+```
+[vince@ServeurTP4 tp-dev-3]$ python bs_server_II1.py --port 13337 --listen 10.2.2.2
+Serveur en attente de connexions sur 10.2.2.2:13337...
+Un client vient de se connecter, son IP c'est 10.2.2.222.
+Données reçues du client : Salut meo !
+```
+
+
+## 2. Logs
+
+### A. Logs serveur
+
+```
+[vince@ServeurTP4 ~]$ cd /var/log
+[vince@ServeurTP4 log]$ ls
+anaconda       cron             dnf.rpm.log          kdump.log         messages           secure            spooler-20241023
+audit          cron-20241003    firewalld            lastlog           messages-20241003  secure-20241003   sssd
+btmp           cron-20241023    hawkey.log           maillog           messages-20241023  secure-20241023   tallylog
+btmp-20241003  dnf.librepo.log  hawkey.log-20241003  maillog-20241003  private            spooler           wtmp
+chrony         dnf.log          hawkey.log-20241023  maillog-20241023  README             spooler-20241003
+```
+
+Pour créer le dossier :
+```
+[vince@ServeurTP4 log]$ sudo mkdir -p /var/log/bs_server
+[sudo] password for vince:
+```
+
+Pour créer le fichier dans le dossier : 
+
+```
+[vince@ServeurTP4 log]$ sudo touch /var/log/bs_server/bs_server.log
+```
+
+Modofier les permissions pour pouvoir écrire dedans : 
+
+```
+[vince@ServeurTP4 log]$ sudo chmod 666 /var/log/bs_server/bs_server.log
+```
+
+Pour vérifier qu'il a bien était créer :
+```
+[vince@ServeurTP4 log]$ ls -l /var/log/bs_server/
+total 0
+-rw-rw-rw- 1 root root 0 Oct 23 20:42 bs_server.log
+```
+
+
+
