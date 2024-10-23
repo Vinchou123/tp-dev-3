@@ -50,7 +50,7 @@ try:
         s.sendall(expression.encode('utf-8'))
        
         data = s.recv(1024)
-        print(f"Le serveur a répondu : '{data.decode('utf-8')}'")
+        print(f"Le serveur a répondu : {data.decode('utf-8')}")
         logging.info(f"Message envoyé : '{expression}'")
 
 except Exception as e:
