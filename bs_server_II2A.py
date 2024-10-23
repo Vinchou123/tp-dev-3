@@ -48,10 +48,8 @@ def validate_ip(ip):
     return ip
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Démarrer le serveur TCP.',
-        epilog='Exemple : python bs_server_II2A.py -p 8888 -l 10.1.1.1'
-    )
+    parser = argparse.ArgumentParser()
+    
     parser.add_argument('-p', '--port', type=validate_port, default=13337,
                         help='Numéro de port (défaut: 13337).')
     parser.add_argument('-l', '--listen', type=validate_ip,
@@ -66,7 +64,7 @@ def main():
     s.bind((host, port))
     s.listen(1)
 
-    log_info(f"Lancement du serveur sur {host}:{port}...")
+    log_info(f"Le serveur tourne sur {host}:{port}")
 
     last_client_time = time.time()
 
