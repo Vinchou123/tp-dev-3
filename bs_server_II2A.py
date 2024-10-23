@@ -61,6 +61,8 @@ def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
+    
+    s.settimeout(1)
 
     log_info(f"Le serveur tourne sur {host}:{port}")
 
@@ -99,6 +101,12 @@ def main():
                     log_warn(f"Erreur inattendue : {e}")
                     break
 
+        except socket.timeout:
+            if time.time() - last_client_time > 60:
+                log_warn("Aucun client depuis plus de une minute.")
+                last_client_time = time.time()
+            
+            time.sleep(1)
         except socket.error as e:
             log_warn(f"Une erreur est survenue lors de l'acceptation d'une connexion : {e}")
             break
@@ -108,15 +116,10 @@ def main():
         finally:
             if conn:
                 conn.close()
-                
-        if time.time() - last_client_time > 60:
-            log_warn("Aucun client depuis plus de une minute.")
-            last_client_time = time.time()
-            
-            time.sleep(1)
 
     s.close()
     sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
