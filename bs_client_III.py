@@ -54,9 +54,11 @@ try:
 
         logging.info(f"Réponse reçue du serveur {host}: '{response}'")
         logging.info(f"Message envoyé au serveur {host}: '{expression}'")
-
-except Exception as e:
-    log_error(f"Erreur lors de la connexion au serveur : {e}")
+        
+except socket.error as e:
+    error_message = f"Impossible de se connecter au serveur {host} sur le port {port}."
+    print(f"\033[31mERROR {error_message}\033[0m")
+    logging.error(error_message)
 
 finally:
     s.close()

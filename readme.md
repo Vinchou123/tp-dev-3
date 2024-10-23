@@ -254,4 +254,14 @@ Erreur lors de la connexion au serveur : [Errno 111] Connection refused
 2024-10-23 22:50:14 INFO Message envoyé : '3+23'
 2024-10-23 22:50:21 INFO Message envoyé : '22-2'
 2024-10-23 22:51:20 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+2024-10-23 23:01:20 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+2024-10-23 23:01:30 INFO Connexion réussie à 10.2.2.2 sur le port 13337
+2024-10-23 23:01:33 INFO Message envoyé : '3+3'
+2024-10-23 23:01:39 ERROR Erreur lors de la connexion au serveur : 'utf-8' codec can't decode byte 0xc3 in position 0: invalid continuation byte
+2024-10-23 23:07:51 INFO Connexion réussie à 10.2.2.2 sur le port 13337
+2024-10-23 23:07:54 INFO Réponse reçue du serveur 10.2.2.2: 'Le résultat est : 6'
+2024-10-23 23:07:54 INFO Message envoyé au serveur 10.2.2.2: '3+3'
+2024-10-23 23:07:57 INFO Réponse reçue du serveur 10.2.2.2: 'Le résultat est : 0'
+2024-10-23 23:07:57 INFO Message envoyé au serveur 10.2.2.2: '2-2'
+2024-10-23 23:10:19 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
 ```
