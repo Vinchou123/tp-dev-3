@@ -5,19 +5,17 @@ import logging
 import os
 import tempfile
 
-log_file_path = os.path.join(tempfile.gettempdir(), 'bs_client.log')
+log_dir = os.path.join(os.path.expanduser("~"), "temp_logs")
+os.makedirs(log_dir, exist_ok=True)
+
+log_file_path = os.path.join(log_dir, 'bs_client.log')
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s %(levelname)s %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
-    handlers=[
-        logging.FileHandler(log_file_path),
-        logging.StreamHandler()
-    ]
+    handlers=[logging.FileHandler(log_file_path)]
 )
 
-def log_info(message):
-    logging.info(message)
 
 def log_error(message):
     print(f"\033[31m{message}\033[0m")
@@ -30,7 +28,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
     s.connect((host, port))
-    log_info(f"Connexion réussie à {host} sur le port {port}")
+    logging.info(f"Connexion réussie à {host} sur le port {port}")
+    print(f"Connecté avec succès au serveur {host} sur le port {port}")
     
     while True:
         expression = input("Entrez une opération arithmétique : ")
@@ -52,7 +51,7 @@ try:
        
         data = s.recv(1024)
         print(f"Le serveur a répondu : '{data.decode('utf-8')}'")
-        log_info(f"Message envoyé : '{expression}'")
+        logging.info(f"Message envoyé : '{expression}'")
 
 except Exception as e:
     log_error(f"Erreur lors de la connexion au serveur : {e}")
