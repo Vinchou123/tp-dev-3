@@ -88,6 +88,8 @@ def main():
                         response = "ptdr t ki"
                     else:
                         response = "Mes respects humble humain."
+                        
+                    log_info(f"Le client a envoyé {addr[0]} : \"{decoded_data}\".")
 
                     conn.sendall(response.encode('utf-8'))
                     log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
