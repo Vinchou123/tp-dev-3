@@ -220,3 +220,38 @@ ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
 🌞 bs_client_III.py
 
 
+```
+[vince@ClientTP4 tp-dev-3]$ python bs_client_III.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Entrez une opération arithmétique : 3+23
+Le serveur a répondu : Le résultat est : 26
+Entrez une opération arithmétique : 22-2
+Le serveur a répondu : Le résultat est : 20
+```
+
+```
+[vince@ClientTP4 tp-dev-3]$ python bs_client_III.py
+Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+```
+
+```
+[vince@ClientTP4 temp_logs]$ cat bs_client.log
+2024-10-23 22:12:32 ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
+2024-10-23 22:12:49 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:13:48 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:13:51 INFO Message envoyé au serveur 10.2.2.2:13337 : meo
+2024-10-23 22:13:51 INFO Réponse reçue du serveur 10.2.2.2:13337 : Meo à toi confrère.
+2024-10-23 22:19:46 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:19:54 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:19:55 INFO Message envoyé au serveur 10.2.2.2:13337 : meo
+2024-10-23 22:19:55 INFO Réponse reçue du serveur 10.2.2.2:13337 : Meo à toi confrère.
+2024-10-23 22:20:17 ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
+2024-10-23 22:47:46 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+2024-10-23 22:47:52 INFO Connexion réussie à 10.2.2.2 sur le port 13337
+2024-10-23 22:47:56 INFO Message envoyé : '3+3'
+2024-10-23 22:49:07 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+2024-10-23 22:50:09 INFO Connexion réussie à 10.2.2.2 sur le port 13337
+2024-10-23 22:50:14 INFO Message envoyé : '3+23'
+2024-10-23 22:50:21 INFO Message envoyé : '22-2'
+2024-10-23 22:51:20 ERROR Erreur lors de la connexion au serveur : [Errno 111] Connection refused
+```

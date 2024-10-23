@@ -51,11 +51,14 @@ try:
        
         data = s.recv(1024)
         print(f"Le serveur a répondu : {data.decode('utf-8')}")
-        logging.info(f"Message envoyé : '{expression}'")
+        logging.info(f"Message envoyé au serveur {host}: '{expression}'")
 
 except Exception as e:
     log_error(f"Erreur lors de la connexion au serveur : {e}")
-
+    
+    conn.sendall('response'.encode('utf-8'))
+    logging.info(f"Réponse reçu du serveur {host}: 'response'")
+    
 finally:
     s.close()
     sys.exit(0)
