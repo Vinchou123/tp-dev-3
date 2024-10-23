@@ -4,7 +4,6 @@ import argparse
 import ipaddress
 import logging
 import time
-from datetime import datetime
 
 log_file_path = '/var/log/bs_server/bs_server.log'
 logging.basicConfig(
@@ -23,7 +22,7 @@ def log_info(message):
 
 def log_warn(message):
     logging.warning(message)
-    print(f"\033[33m{message}\033[0m")
+    print(f"\033[33m{message}\033[0m") 
 
 def validate_port(port):
     try:
@@ -49,7 +48,6 @@ def validate_ip(ip):
 
 def main():
     parser = argparse.ArgumentParser()
-    
     parser.add_argument('-p', '--port', type=validate_port, default=13337,
                         help='Numéro de port (défaut: 13337).')
     parser.add_argument('-l', '--listen', type=validate_ip,
@@ -76,19 +74,33 @@ def main():
             last_client_time = time.time()
 
             while True:
-                data = conn.recv(1024)
-                if not data:
-                    break
-                
-                decoded_data = data.decode('utf-8')
-                log_info(f"Le client {addr[0]} a envoyé \"{decoded_data}\".")
+                try:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
+                    
+                    decoded_data = data.decode('utf-8')
+                    log_info(f"Le client {addr[0]} a envoyé \"{decoded_data}\".")
 
-                response = "Message reçu."
-                conn.sendall(response.encode('utf-8'))
-                log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
-        
+                    if "meo" in decoded_data.lower():
+                        response = "Meo à toi confrère."
+                    elif "waf" in decoded_data.lower():
+                        response = "ptdr t ki"
+                    else:
+                        response = "Mes respects humble humain."
+
+                    conn.sendall(response.encode('utf-8'))
+                    log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
+
+                except socket.error as e:
+                    log_warn(f"Une erreur est survenue : {e}")
+                    break
+                except Exception as e:
+                    log_warn(f"Erreur inattendue : {e}")
+                    break
+
         except socket.error as e:
-            log_warn(f"Une erreur est survenue : {e}")
+            log_warn(f"Une erreur est survenue lors de l'acceptation d'une connexion : {e}")
             break
         except Exception as e:
             log_warn(f"Erreur inattendue : {e}")

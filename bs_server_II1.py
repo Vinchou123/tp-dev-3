@@ -2,27 +2,6 @@ import socket
 import sys
 import argparse
 import ipaddress
-import logging
-import time
-
-log_file_path = '/var/log/bs_server/bs_server.log'
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    handlers=[
-        logging.FileHandler(log_file_path),
-        logging.StreamHandler()
-    ]
-)
-
-def log_info(message):
-    logging.info(message)
-    print(f"\033[37m{message}\033[0m")
-
-def log_warn(message):
-    logging.warning(message)
-    print(f"\033[33m{message}\033[0m") 
 
 def validate_port(port):
     try:
@@ -47,7 +26,8 @@ def validate_ip(ip):
     return ip
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()  
+    
     parser.add_argument('-p', '--port', type=validate_port, default=13337,
                         help='Numéro de port (défaut: 13337).')
     parser.add_argument('-l', '--listen', type=validate_ip,
@@ -62,58 +42,37 @@ def main():
     s.bind((host, port))
     s.listen(1)
 
-    log_info(f"Le serveur tourne sur {host}:{port}")
+    print(f"Serveur en attente de connexions sur {host}:{port}...")  
 
-    last_client_time = time.time()
+    conn, addr = s.accept()
+    print(f"Un client vient de se connecter, son IP c'est {addr[0]}.")
 
     while True:
-        conn, addr = None, None
         try:
-            conn, addr = s.accept()
-            log_info(f"Un client ({addr[0]}) s'est connecté.")
-            last_client_time = time.time()
-
-            while True:
-                try:
-                    data = conn.recv(1024)
-                    if not data:
-                        break
-                    
-                    decoded_data = data.decode('utf-8')
-                    log_info(f"Le client {addr[0]} a envoyé \"{decoded_data}\".")
-
-                    if "meo" in decoded_data.lower():
-                        response = "Meo à toi confrère."
-                    elif "waf" in decoded_data.lower():
-                        response = "ptdr t ki"
-                    else:
-                        response = "Mes respects humble humain."
-
-                    conn.sendall(response.encode('utf-8'))
-                    log_info(f"Réponse envoyée au client {addr[0]} : \"{response}\".")
-
-                except socket.error as e:
-                    log_warn(f"Une erreur est survenue : {e}")
-                    break
-                except Exception as e:
-                    log_warn(f"Erreur inattendue : {e}")
-                    break
-
+            data = conn.recv(1024)
+            if not data:
+                break
+            
+            decoded_data = data.decode('utf-8')
+            print(f"Données reçues du client : {decoded_data}")
+            
+            if "meo" in decoded_data.lower():
+                response = "Meo à toi confrère."
+            elif "waf" in decoded_data.lower():
+                response = "ptdr t ki"
+            else:
+                response = "Mes respects humble humain."
+            
+            conn.sendall(response.encode('utf-8'))
+        
         except socket.error as e:
-            log_warn(f"Une erreur est survenue lors de l'acceptation d'une connexion : {e}")
+            print(f"Une erreur est survenue : {e}")
             break
         except Exception as e:
-            log_warn(f"Erreur inattendue : {e}")
+            print(f"Erreur inattendue : {e}")
             break
-        finally:
-            if conn:
-                conn.close()
-
-        if time.time() - last_client_time > 60:
-            log_warn("Aucun client depuis plus de une minute.")
-            time.sleep(60)
-
-    s.close()
+    
+    conn.close()
     sys.exit(0)
 
 if __name__ == "__main__":
