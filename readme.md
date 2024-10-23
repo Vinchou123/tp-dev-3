@@ -186,7 +186,37 @@ Dans le fichier des logs :
 ```
 🌞 bs_client_II2B.py
 
+```
+[vince@ClientTP4 tp-dev-3]$ python bs_client_II2B.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? coucou
+Erreur : La chaîne doit contenir soit 'waf' soit 'meo'.
+[vince@ClientTP4 tp-dev-3]$ python bs_client_II2B.py
+Connecté avec succès au serveur 10.2.2.2 sur le port 13337
+Que souhaites-tu écrire au serveur ? meo
+Le serveur a répondu : 'Meo à toi confrère.'
+[vince@ClientTP4 tp-dev-3]$ python bs_client_II2B.py
+ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
+```
 
 
+```
+[vince@ClientTP4 temp_logs]$ cat bs_client.log
+2024-10-23 22:12:32 ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
+2024-10-23 22:12:49 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:13:48 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:13:51 INFO Message envoyé au serveur 10.2.2.2:13337 : meo
+2024-10-23 22:13:51 INFO Réponse reçue du serveur 10.2.2.2:13337 : Meo à toi confrère.
+2024-10-23 22:19:46 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:19:54 INFO Connexion réussie à 10.2.2.2:13337
+2024-10-23 22:19:55 INFO Message envoyé au serveur 10.2.2.2:13337 : meo
+2024-10-23 22:19:55 INFO Réponse reçue du serveur 10.2.2.2:13337 : Meo à toi confrère.
+2024-10-23 22:20:17 ERROR Impossible de se connecter au serveur 10.2.2.2 sur le port 13337.
+```
+
+
+# III. COMPUTE
+
+🌞 bs_client_III.py
 
 
