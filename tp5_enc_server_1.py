@@ -35,7 +35,13 @@ while True:
                 client.send(str(res).encode())
             except Exception as e:
                 client.send(f"Erreur: {str(e)}".encode())
+            
+        else:
+            client.send("Erreur: message mal formé.".encode())
 
+        break
+    except Exception as e:
+        print(f"Erreur inattendue : {e}")
         break
 
 client.close()
