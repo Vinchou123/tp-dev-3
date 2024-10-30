@@ -1,4 +1,5 @@
 import socket
+import ast
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -30,7 +31,7 @@ while True:
             print(f"Message reçu du client : {message_received}")
 
             try:
-                message = message.replace('+', ',').replace('-', ', -') 
+                message = message_received.replace('+', ',').replace('-', ', -') 
                 operands = ast.literal_eval(f"[{message}]")
                 res = sum(operands)
                 client.send(str(res).encode())
