@@ -28,18 +28,14 @@ while True:
 
         if message_received.endswith("<clafin>"):
             message = message_received[:-8] 
-            print(f"Message reçu du client : {message}")
+            print(f"Message reçu du client : {message_received}")
 
             try:
-                res = eval(message)
+                res = eval(message_received)
                 client.send(str(res).encode())
             except Exception as e:
                 client.send(f"Erreur: {str(e)}".encode())
-        else:
-            print("Le message ne se termine pas par la séquence de fin.")
 
-    except socket.error:
-        print("Une erreur de socket est survenue.")
         break
 
 client.close()
