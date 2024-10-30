@@ -27,11 +27,10 @@ while True:
         message_received = b"".join(chunks).decode('utf-8')
 
         if message_received.endswith("<clafin>"):
-            message = message_received[:-8] 
             print(f"Message reçu du client : {message_received}")
 
             try:
-                res = eval(message_received)
+                res = eval(message)
                 client.send(str(res).encode())
             except Exception as e:
                 client.send(f"Erreur: {str(e)}".encode())

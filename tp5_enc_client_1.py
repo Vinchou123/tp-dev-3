@@ -28,7 +28,7 @@ encoded_msg = msg.encode('utf-8')
 msg_len = len(encoded_msg)
 
 header = msg_len.to_bytes(4, byteorder='big')
-sequence_fin = "clafin".encode('utf-8')
+sequence_fin = "<clafin>".encode('utf-8')
 
 payload = header + encoded_msg + sequence_fin
 sock.send(payload)
