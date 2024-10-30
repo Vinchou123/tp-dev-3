@@ -22,13 +22,13 @@ while True:
     if validate_expression(msg):
         break
     else:
-        print("Expression invalide. Essayez un format simple: x opérateur y, avec x et y entre -1048575 et 1048575.")
+        print("Expression invalide. Essayez un format simple: x +ou- y, avec x et y entre -1048575 et 1048575.")
 
 encoded_msg = msg.encode('utf-8')
 msg_len = len(encoded_msg)
 
 header = msg_len.to_bytes(4, byteorder='big')
-sequence_fin = "<clafin>".encode('utf-8')
+sequence_fin = "clafin".encode('utf-8')
 
 payload = header + encoded_msg + sequence_fin
 sock.send(payload)
