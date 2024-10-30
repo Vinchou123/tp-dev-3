@@ -15,7 +15,7 @@ def validate_expression(expression):
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('10.2.2.2', 13337))
-s.send('Hello'.encode())
+sock.send('Hello'.encode())
 
 while True:
     msg = input("Entrez une expression arithmétique: ")
