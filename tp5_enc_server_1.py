@@ -30,7 +30,7 @@ while True:
             print(f"Message reçu du client : {message_received}")
 
             try:
-                res = eval(message)
+                res = eval(message_received)
                 client.send(str(res).encode())
             except Exception as e:
                 client.send(f"Erreur: {str(e)}".encode())
