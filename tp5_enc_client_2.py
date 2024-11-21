@@ -2,7 +2,7 @@ import socket
 import re
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('127.0.0.1', 9999))
+s.connect(('10.2.2.2', 9999))
 
 def is_calcul(value: str):
     return re.search(r'^([\-+]?\d+)\s*[\+\-\*]\s*([\-+]?\d+)$', value)
