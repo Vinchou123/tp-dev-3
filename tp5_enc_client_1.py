@@ -14,7 +14,7 @@ def check_number_limits(numbers: list):
     """Vérifie que les nombres sont dans la plage autorisée"""
     return all(-1048575 <= int(num) <= 1048575 for num in numbers)
 
-msg = input("Calcul à envoyer (ex : 3 + 4) : ")
+msg = input("Calcul à envoyer : ")
 if not is_valid_expression(msg):
     raise ValueError("L'expression saisie n'est pas valide.")
 
