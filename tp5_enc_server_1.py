@@ -23,7 +23,7 @@ while True:
             break
         
         msg_len = int.from_bytes(header, byteorder='big')
-        print(f"Taille du message à lire : {msg_len} octets")
+        print(f"Taille du message : {msg_len} octets")
         
         
         message = client.recv(msg_len)
