@@ -27,7 +27,7 @@ header = msg_len.to_bytes(4, byteorder='big')
 payload = header + msg.encode('utf-8') + END_SEQUENCE
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
+    s.connect(('10.2.2.2', 9999))
     print("Connexion au serveur établie.")
     s.sendall(payload)
     print("Message envoyé :", payload)
