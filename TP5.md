@@ -34,5 +34,14 @@ B. Un autre exemple d'opti
 
 C. Calculatrice opti
 
-🌞 tp5_enc_client_2.py
+
+## III. Serveur Web HTTP
+
+### 0. Ptite intro HTTP
+
+1. Serveur Web
+
+🌞 tp5_web_serv_1.py
+
+
 
