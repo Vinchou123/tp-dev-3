@@ -21,9 +21,17 @@ def log_info(message):
     logging.info(message)
     print(f"\033[37m{message}\033[0m")
 
+
+
+
+
 def log_warn(message):
     logging.warning(message)
     print(f"\033[33m{message}\033[0m") 
+
+
+
+
 
 def validate_port(port):
     try:
@@ -48,6 +56,9 @@ def validate_ip(ip):
     return ip
 
 def main():
+    """
+    this is my main
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', type=validate_port, default=13337,
                         help='Numéro de port (défaut: 13337).')
@@ -76,7 +87,7 @@ def main():
                     data = conn.recv(1024)
                     if not data:
                         break
-                    
+
                     decoded_data = data.decode('utf-8')
                     log_info(f"Le client {addr[0]} a envoyé \"{decoded_data}\".")
 

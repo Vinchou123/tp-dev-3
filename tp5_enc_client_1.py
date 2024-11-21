@@ -1,39 +1,35 @@
 import socket
 import re
 
-def validate_expression(expression):
-    pattern = r'^-?\d{1,7}\s*[\+\-\*]\s*-?\d{1,7}$'
-    if re.match(pattern, expression):
-        operands = re.split(r'[\+\-\*]', expression)
-        try:
-            x, y = int(operands[0].strip()), int(operands[1].strip())
-            if -1048575 <= x <= 1048575 and -1048575 <= y <= 1048575:
-                return True
-        except ValueError:
-            return False
-    return False
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 9999))
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('10.2.2.2', 13337))
-sock.send('Hello'.encode())
+def is_calcul(value: str):
+    return re.search(r'^(-?\d+)\s*[\+\-\*]\s*(-?\d+)$', value)
 
-while True:
-    msg = input("Entrez une expression arithmétique: ")
-    if validate_expression(msg):
-        break
-    else:
-        print("Expression invalide. Essayez un format simple: x +ou- y, avec x et y entre -1048575 et 1048575.")
+def check_byte_limit(l:list):
+    return 0==len([int(x) for x in l if abs(int(x)) >= 1048575])
 
+msg = input("Calcul à envoyer: ")
+if not is_calcul(msg):
+    raise ValueError("Mauvais calcul")
+
+values = re.split(r"\s*[\+\-\*]\s*", msg)
+if not check_byte_limit(values):
+    raise ValueError("Valeur trop grande")
+
+
+
+msg_len = len(msg)
+END = 0
 encoded_msg = msg.encode('utf-8')
-msg_len = len(encoded_msg)
 
 header = msg_len.to_bytes(4, byteorder='big')
-sequence_fin = "<clafin>".encode('utf-8')
+footer = END.to_bytes(4, byteorder='big')
+payload = header + encoded_msg + footer
 
-payload = header + encoded_msg + sequence_fin
-sock.send(payload)
+s.send(payload)
 
-s_data = sock.recv(1024)
-print("Résultat:", s_data.decode())
-
-sock.close()
+s_data = s.recv(1024)
+print(s_data.decode())
+s.close()
