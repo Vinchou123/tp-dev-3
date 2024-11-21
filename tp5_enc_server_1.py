@@ -1,42 +1,42 @@
 import socket
 
+
+HOST = '127.0.0.1'
+PORT = 9999
+END_SEQUENCE = b"<clafin>"  
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-sock.bind(('127.0.0.1', 9999))
-sock.listen()
-client, client_addr = sock.accept()
+sock.bind((HOST, PORT))
+sock.listen(5)
 
-FOOTER = 0
+print(f"Serveur en écoute sur {HOST}:{PORT}")
 
 while True:
-    header = client.recv(4)
-    if not header:
-        break
-
-    msg_len = int.from_bytes(header[0:4], byteorder='big')
-
-    print(f"Lecture des {msg_len} prochains octets")
-
-    chunks = []
-
-    bytes_received = 0
-    while bytes_received < msg_len:
-        chunk = client.recv(min(msg_len - bytes_received, 1024))
-        if not chunk:
-            raise RuntimeError('Invalid chunk received bro')
-
-        chunks.append(chunk)
-
-        bytes_received += len(chunk)
-
-    message_received = b"".join(chunks).decode('utf-8')
-    footer_msg = client.recv(1)
-    footer_data = int.from_bytes(footer_msg, byteorder='big')
-
-    if FOOTER == footer_data:
-        print(f"Received from client {message_received}")
-    else:
-        print("Aucun séquence de fin trouvée")
-
-client.close()
-sock.close()
+    client, client_addr = sock.accept()
+    print(f"Connexion acceptée depuis {client_addr}")
+    
+    try:
+        
+        header = client.recv(4)
+        if not header:
+            break
+        
+        msg_len = int.from_bytes(header, byteorder='big')
+        print(f"Taille du message à lire : {msg_len} octets")
+        
+        
+        message = client.recv(msg_len)
+        footer = client.recv(len(END_SEQUENCE))
+        
+        if footer == END_SEQUENCE:
+            print(f"Message reçu : {message.decode('utf-8')}")
+            client.sendall("Message reçu avec succès".encode('utf-8'))
+        else:
+            print("Erreur : Séquence de fin invalide")
+            client.sendall("Erreur : Séquence de fin invalide".encode('utf-8'))
+    except Exception as e:
+        print(f"Erreur : {e}")
+    finally:
+        client.close()
+        print("Connexion fermée avec le client")

@@ -4,40 +4,34 @@ import re
 
 HOST = '127.0.0.1'
 PORT = 9999
+END_SEQUENCE = b"<clafin>"  
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((HOST, PORT))
-server_socket.listen(5)
+def is_valid_expression(value: str):
+    """Valide si l'expression est du type x opérateur y"""
+    return re.match(r'^-?\d+\s*[\+\-\*]\s*-?\d+$', value)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('127.0.0.1', 9999))
+def check_number_limits(numbers: list):
+    """Vérifie que les nombres sont dans la plage autorisée"""
+    return all(-1048575 <= int(num) <= 1048575 for num in numbers)
 
-def is_calcul(value: str):
-    return re.search(r'^(-?\d+)\s*[\+\-\*]\s*(-?\d+)$', value)
+msg = input("Calcul à envoyer (ex : 3 + 4) : ")
+if not is_valid_expression(msg):
+    raise ValueError("L'expression saisie n'est pas valide.")
 
-def check_byte_limit(l:list):
-    return 0==len([int(x) for x in l if abs(int(x)) >= 1048575])
+numbers = re.findall(r'-?\d+', msg)
+if not check_number_limits(numbers):
+    raise ValueError("Les nombres doivent être compris entre -1048575 et 1048575.")
 
-msg = input("Calcul à envoyer: ")
-if not is_calcul(msg):
-    raise ValueError("Mauvais calcul")
+msg_len = len(msg.encode('utf-8'))
+header = msg_len.to_bytes(4, byteorder='big')  
+payload = header + msg.encode('utf-8') + END_SEQUENCE
 
-values = re.split(r"\s*[\+\-\*]\s*", msg)
-if not check_byte_limit(values):
-    raise ValueError("Valeur trop grande")
-
-
-
-msg_len = len(msg)
-END = 0
-encoded_msg = msg.encode('utf-8')
-
-header = msg_len.to_bytes(4, byteorder='big')
-footer = END.to_bytes(4, byteorder='big')
-payload = header + encoded_msg + footer
-
-s.send(payload)
-
-s_data = s.recv(1024)
-print(s_data.decode())
-s.close()
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    print("Connexion au serveur établie.")
+    s.sendall(payload)
+    print("Message envoyé :", payload)
+    
+   
+    response = s.recv(1024)
+    print("Réponse du serveur :", response.decode())
