@@ -43,5 +43,25 @@ C. Calculatrice opti
 
 🌞 tp5_web_serv_1.py
 
+```
+[vince@ServeurTP4 tp-dev-3]$ python tp5_web_serv_1.py
+Serveur lancé
+```
+
+2. Client Web
+
+🌞 tp5_web_client_2.py
+
+```
+[vince@ClientTP4 tp-dev-3]$ python tp5_web_client_2.py
+HTTP/1.0 200 OK
+
+<h1>Hello je suis un serveur HTTP</h1>
+```
+
+3. Délivrer des pages web
+
+🌞 tp5_web_serv_3.py
+
 
 

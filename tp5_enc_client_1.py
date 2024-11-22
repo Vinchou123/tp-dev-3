@@ -22,9 +22,9 @@ numbers = re.findall(r'-?\d+', msg)
 if not check_number_limits(numbers):
     raise ValueError("Les nombres doivent être compris entre -1048575 et 1048575.")
 
-msg_len = len(msg.encode('utf-8'))
+msg_len = len(msg.encode("'utf-8'"))
 header = msg_len.to_bytes(4, byteorder='big')  
-payload = header + msg.encode('utf-8') + END_SEQUENCE
+payload = header + msg.encode("utf-8") + END_SEQUENCE
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(('10.2.2.2', 9999))

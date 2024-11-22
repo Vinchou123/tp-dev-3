@@ -30,11 +30,11 @@ while True:
         footer = client.recv(len(END_SEQUENCE))
         
         if footer == END_SEQUENCE:
-            print(f"Message reçu : {message.decode('utf-8')}")
-            client.sendall("Message reçu avec succès".encode('utf-8'))
+            print(f"Message reçu : {message.decode("utf-8")}")
+            client.sendall("Message reçu avec succès".encode("utf-8"))
         else:
             print("Erreur : Séquence de fin invalide")
-            client.sendall("Erreur : Séquence de fin invalide".encode('utf-8'))
+            client.sendall("Erreur : Séquence de fin invalide".encode("utf-8"))
     except Exception as e:
         print(f"Erreur : {e}")
     finally:
