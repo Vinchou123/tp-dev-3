@@ -1,7 +1,7 @@
 import socket
 
 def main():
-    server_address = ('10.2.2.222', 9999)
+    server_address = ('10.2.2.2', 8888)
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
