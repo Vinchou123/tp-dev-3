@@ -15,6 +15,7 @@ async def get_content(url):
 async def write_content(content, file):
     async with aiofiles.open(file, "w") as out:
         await out.write(content)
+        print(f"Le contenu a été écrit dans {file}")
         await out.flush()
 
 def main():
